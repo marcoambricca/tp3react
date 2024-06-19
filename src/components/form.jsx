@@ -1,17 +1,53 @@
-import InputField from "./input-field.jsx"
+import React, { useState } from "react";
 
-export default function Form(props){
+const Form = (addCita) => {
+    const [formData, setFormData] = useState({
+        mascotName: '',
+        ownerName: '',
+        matchDate: '',
+        matchTime: '',
+        sintomas: ''
+    });
+
+    const handleChange = (e) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    const handleSubmit = () => {
+        addCita(formData);
+        console.log(formData);
+        setFormData({
+            mascotName: '',
+            ownerName: '',
+            matchDate: '',
+            matchTime: '',
+            sintomas: ''
+        });
+    };
+    
     return (
-        <>
-            <form action={props.setMatches}>
-                <InputField name="mascotName" label="Nombre Mascota" type="text"/>
-                <InputField name="ownerName" label="Nombre Dueño" type="text"/>
-                <InputField name="date" label="Fecha" type="date"/>
-                <InputField name="time" label="Hora" type="time"/>
-                <label htmlFor="sintomas" id="textarea-label">Sintomas: </label>
-                <textarea name='sintomas' rows={4}></textarea>
-                <input type="submit" value='Agregar cita'></input>
-            </form>
-        </>
+        <form onSubmit={handleSubmit}>
+            <label>Nombre mascota</label>
+            <input type="text" value={formData.mascotName} placeholder="Nombre mascota" name="mascotName" onChange={handleChange} required/>
+
+            <label>Nombre dueño</label>
+            <input type="text" value={formData.ownerName} placeholder="Nombre dueño" name="ownerName" onChange={handleChange} required/>
+
+            <label>Fecha</label>
+            <input type="date" value={formData.matchDate} name="matchDate" onChange={handleChange} required/>
+
+            <label>Horario</label>
+            <input type="time" value={formData.matchTime} name="matchTime" onChange={handleChange} required/>
+
+            <label>Sintomas: </label>
+            <textarea name='sintomas' rows={4} value={formData.sintomas} style={{resize: "none"}} onChange={handleChange}></textarea>
+
+            <button type="submit" className="btn submit-btn">Agregar cita</button>
+        </form>
     )
 }
+
+export default Form;
