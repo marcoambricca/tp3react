@@ -7,9 +7,9 @@ export default function InputField(props){
         ph = props.label
     }
     return (
-        <>
+        <div className="input-field">
             <label for={props.name} className="input-label">{props.label}</label>
             <input type={props.type} placeholder={ph} name={props.name} required />
-        </>
+        </div>
     )
 }
