@@ -30,7 +30,7 @@ function App() {
     <div className="App"> 
       <Form handleAddCita={handleAddCita}/>
       <List arrayCitas={arrayCitas} onDeleteCita={deleteCita}/>
-      {showModal && <Modal h1={'¿Desea eliminar esta cita?'} setter={(value) => {
+      {showModal && <Modal heading={'¿Desea eliminar esta cita?'} setter={(value) => {
             if (value) {
               handleDelete(citaAEliminar); 
             }
