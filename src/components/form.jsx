@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Form = (addCita) => {
+export default function Form({handleAddCita}){
     const [formData, setFormData] = useState({
         mascotName: '',
         ownerName: '',
@@ -16,8 +16,9 @@ const Form = (addCita) => {
         });
     };
 
-    const handleSubmit = () => {
-        addCita(formData);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        handleAddCita(formData);
         console.log(formData);
         setFormData({
             mascotName: '',
@@ -49,5 +50,3 @@ const Form = (addCita) => {
         </form>
     )
 }
-
-export default Form;

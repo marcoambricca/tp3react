@@ -6,32 +6,33 @@ import './index.css'
 
 function App() {
   const [arrayCitas, setArrayCitas] = useState([]);
-  const addCita = (cita) => {
+  
+  const handleAddCita = (cita) => {
     setArrayCitas([...arrayCitas, cita]);
   }
 
-  const [turnoAEliminar, setTurnoAEliminar] = useState();
+  const [citaAEliminar, setCitaAEliminar] = useState();
   const [showModal, setShowModal] = useState(false);
 
   const deleteCita = (target) => {
-    setTurnoAEliminar(target)
-    setShowModal(true)
+    setCitaAEliminar(target);
+    setShowModal(true);
   };
 
   const handleDelete = (target) =>{
     let mascotName = target.target.id
     const updatedArray = arrayCitas.filter(cita => cita.mascotName !== mascotName);
     setArrayCitas(updatedArray);
-    setShowModal(false)
+    setShowModal(false);
   }
 
   return (
     <div className="App"> 
-      <Form onAddCita={addCita}/>
+      <Form handleAddCita={handleAddCita}/>
       <List arrayCitas={arrayCitas} onDeleteCita={deleteCita}/>
       {showModal && <Modal h1={'¿Desea eliminar esta cita?'} setter={(value) => {
             if (value) {
-              handleDelete(turnoAEliminar); 
+              handleDelete(citaAEliminar); 
             }
             setShowModal(false); 
           }}
